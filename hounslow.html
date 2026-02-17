@@ -1,0 +1,494 @@
+<style>
+  :root{
+    /* === BRAND TOKENS (adjust these 3 to match Totalee Halal exactly) === */
+    --brand: #0E7A3C;      /* halal green */
+    --brand-2: #0A5E2E;    /* darker green */
+    --cream: #F7F6F0;      /* soft cream background */
+    --ink: #101828;        /* text */
+    --muted: #667085;      /* secondary text */
+    --card: #FFFFFF;       /* card bg */
+    --border: rgba(16,24,40,.10);
+    --shadow: 0 10px 30px rgba(16,24,40,.08);
+    --radius: 16px;
+  }
+
+  /* --- Base --- */
+  .th-wrap{
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    background: radial-gradient(900px 420px at 10% -10%, rgba(14,122,60,.16), transparent 60%),
+                radial-gradient(800px 380px at 90% 0%, rgba(14,122,60,.12), transparent 55%),
+                var(--cream);
+    color: var(--ink);
+    padding: 18px 14px 28px;
+  }
+  .th-container{
+    max-width: 980px;
+    margin: 0 auto;
+  }
+  .th-topbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding: 10px 0 14px;
+  }
+  .th-brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    min-width: 0;
+  }
+  .th-logo{
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--brand), var(--brand-2));
+    box-shadow: 0 10px 20px rgba(14,122,60,.18);
+    flex: 0 0 auto;
+  }
+  .th-brandtext{
+    min-width:0;
+    line-height:1.1;
+  }
+  .th-brandtext strong{
+    display:block;
+    font-size: 14px;
+    letter-spacing: .2px;
+    white-space: nowrap;
+    overflow:hidden;
+    text-overflow: ellipsis;
+  }
+  .th-brandtext span{
+    display:block;
+    font-size: 12px;
+    color: var(--muted);
+    white-space: nowrap;
+    overflow:hidden;
+    text-overflow: ellipsis;
+  }
+
+  .th-pill{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding: 8px 10px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.70);
+    border: 1px solid var(--border);
+    backdrop-filter: blur(6px);
+    font-size: 12px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .th-dot{
+    width: 8px; height: 8px; border-radius: 99px;
+    background: var(--brand);
+    box-shadow: 0 0 0 4px rgba(14,122,60,.14);
+  }
+
+  /* --- Hero --- */
+  .th-hero{
+    background: linear-gradient(180deg, rgba(255,255,255,.90), rgba(255,255,255,.72));
+    border: 1px solid var(--border);
+    border-radius: calc(var(--radius) + 6px);
+    box-shadow: var(--shadow);
+    padding: 18px 16px;
+    overflow:hidden;
+    position: relative;
+  }
+  .th-hero::after{
+    content:"";
+    position:absolute;
+    inset:auto -40px -60px auto;
+    width: 220px; height: 220px;
+    background: radial-gradient(circle at 30% 30%, rgba(14,122,60,.35), rgba(14,122,60,0) 65%);
+    transform: rotate(10deg);
+    pointer-events:none;
+  }
+  .th-h1{
+    font-size: 22px;
+    line-height: 1.15;
+    margin: 0 0 6px;
+    letter-spacing: -.3px;
+  }
+  .th-sub{
+    margin: 0 0 12px;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.35;
+    max-width: 60ch;
+  }
+  .th-trust{
+    display:flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0 0 14px;
+  }
+  .th-trust span{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding: 7px 10px;
+    border-radius: 999px;
+    background: rgba(14,122,60,.08);
+    border: 1px solid rgba(14,122,60,.18);
+    color: var(--brand-2);
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .th-actions{
+    display:flex;
+    gap:10px;
+    flex-wrap: wrap;
+  }
+  .th-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    padding: 12px 14px;
+    border-radius: 14px;
+    text-decoration:none;
+    font-weight: 700;
+    font-size: 14px;
+    border: 1px solid transparent;
+    cursor:pointer;
+    flex: 1 1 220px;
+  }
+  .th-btn.primary{
+    background: linear-gradient(135deg, var(--brand), var(--brand-2));
+    color: #fff;
+    box-shadow: 0 14px 26px rgba(14,122,60,.22);
+  }
+  .th-btn.secondary{
+    background: rgba(255,255,255,.85);
+    color: var(--ink);
+    border-color: var(--border);
+  }
+  .th-btn small{
+    font-weight: 600;
+    opacity: .9;
+  }
+
+  /* --- Section headings --- */
+  .th-section{
+    margin-top: 16px;
+  }
+  .th-section h2{
+    font-size: 16px;
+    margin: 14px 2px 10px;
+    letter-spacing: -.2px;
+  }
+  .th-section p.note{
+    margin: -2px 2px 10px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.35;
+  }
+
+  /* --- Cards list --- */
+  .th-grid{
+    display:grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .th-card{
+    display:block;
+    text-decoration:none;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow:hidden;
+    box-shadow: 0 8px 20px rgba(16,24,40,.06);
+  }
+  .th-card-inner{
+    display:flex;
+    gap: 12px;
+    padding: 12px;
+    align-items: center;
+  }
+  .th-img{
+    width: 86px;
+    height: 72px;
+    border-radius: 14px;
+    flex: 0 0 auto;
+    background: linear-gradient(135deg, rgba(14,122,60,.20), rgba(14,122,60,.06));
+    border: 1px solid rgba(16,24,40,.08);
+    overflow:hidden;
+    position: relative;
+  }
+  .th-img img{
+    width:100%;
+    height:100%;
+    object-fit: cover;
+    display:block;
+  }
+  .th-main{
+    min-width: 0;
+    flex: 1 1 auto;
+  }
+  .th-name{
+    margin: 0 0 4px;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: -.2px;
+    white-space: nowrap;
+    overflow:hidden;
+    text-overflow: ellipsis;
+  }
+  .th-meta{
+    margin: 0 0 8px;
+    color: var(--muted);
+    font-size: 12px;
+    white-space: nowrap;
+    overflow:hidden;
+    text-overflow: ellipsis;
+  }
+  .th-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap: 10px;
+  }
+  .th-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding: 7px 10px;
+    border-radius: 999px;
+    background: rgba(14,122,60,.10);
+    border: 1px solid rgba(14,122,60,.18);
+    color: var(--brand-2);
+    font-size: 12px;
+    font-weight: 800;
+    white-space: nowrap;
+  }
+  .th-cta{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    background: rgba(16,24,40,.04);
+    border: 1px solid rgba(16,24,40,.10);
+    color: var(--ink);
+    font-weight: 800;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  /* --- “Why” blocks --- */
+  .th-why{
+    display:grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .th-why .box{
+    background: rgba(255,255,255,.85);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px;
+  }
+  .th-why .box strong{
+    display:block;
+    margin-bottom: 4px;
+    font-size: 13px;
+  }
+  .th-why .box span{
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.35;
+  }
+
+  /* --- FAQ --- */
+  .th-faq details{
+    background: rgba(255,255,255,.85);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px;
+    margin-bottom: 10px;
+  }
+  .th-faq summary{
+    cursor:pointer;
+    font-weight: 800;
+    font-size: 13px;
+    list-style: none;
+  }
+  .th-faq summary::-webkit-details-marker{ display:none; }
+  .th-faq p{
+    margin: 8px 0 0;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  /* --- Sticky bottom bar --- */
+  .th-sticky{
+    position: sticky;
+    bottom: 10px;
+    z-index: 20;
+    margin-top: 16px;
+  }
+  .th-sticky-inner{
+    display:flex;
+    gap: 10px;
+    align-items:center;
+    justify-content: space-between;
+    background: rgba(255,255,255,.92);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 10px 10px 10px 12px;
+    box-shadow: 0 18px 40px rgba(16,24,40,.14);
+    backdrop-filter: blur(10px);
+  }
+  .th-sticky-text{
+    min-width:0;
+  }
+  .th-sticky-text strong{
+    display:block;
+    font-size: 13px;
+    letter-spacing: -.15px;
+    white-space: nowrap;
+    overflow:hidden;
+    text-overflow: ellipsis;
+  }
+  .th-sticky-text span{
+    display:block;
+    font-size: 12px;
+    color: var(--muted);
+    white-space: nowrap;
+    overflow:hidden;
+    text-overflow: ellipsis;
+  }
+  .th-sticky-btn{
+    flex: 0 0 auto;
+    text-decoration:none;
+    background: linear-gradient(135deg, var(--brand), var(--brand-2));
+    color:#fff;
+    font-weight: 900;
+    font-size: 13px;
+    padding: 11px 14px;
+    border-radius: 999px;
+    box-shadow: 0 14px 26px rgba(14,122,60,.20);
+  }
+
+  /* --- Desktop enhancements --- */
+  @media (min-width: 720px){
+    .th-wrap{ padding: 22px 18px 34px; }
+    .th-hero{ padding: 22px 22px; }
+    .th-h1{ font-size: 28px; }
+    .th-sub{ font-size: 15px; }
+    .th-grid{ grid-template-columns: 1fr 1fr; }
+    .th-img{ width: 96px; height: 78px; }
+    .th-why{ grid-template-columns: 1fr 1fr; }
+  }
+</style>
+<div class="th-wrap">
+<div class="th-container"><!-- TOP BAR -->
+<div class="th-topbar">
+<div class="th-brand"><!-- Replace this with real logo if you have it (img tag), or keep as brand mark -->
+<div class="th-logo" aria-hidden="true">&nbsp;</div>
+<div class="th-brandtext"><strong>Totalee Halal</strong> Hounslow &bull; Halal-only delivery</div>
+</div>
+<div class="th-pill" title="Local area page">Local deals &bull; London</div>
+</div>
+<!-- HERO -->
+<section class="th-hero">
+<h1 class="th-h1">Halal Food Delivery in Hounslow</h1>
+<p class="th-sub">Order from verified halal restaurants near you. Tap a restaurant to open it in the Totalee Halal app and place your order.</p>
+<div class="th-trust" aria-label="Key benefits">✔ Halal-only ✔ 30% off first order ✔ Fast local delivery</div>
+<div class="th-actions"><a class="th-btn primary" href="#" aria-label="View 30% off deals"> View 30% Deals <small>&rarr;</small> </a> <a class="th-btn secondary" href="#" aria-label="View Ramadan specials"> View Ramadan Specials <small>&rarr;</small> </a></div>
+</section>
+<!-- POPULAR LIST -->
+<section id="restaurants" class="th-section">
+<h2>Popular in Hounslow Today</h2>
+<p class="note">Top picks with app-only offers. Replace names, offers and links later.</p>
+<div class="th-grid"><!-- CARD 1 --><a class="th-card" href="#">
+<div class="th-card-inner">
+<div class="th-img"><img src="https://images.unsplash.com/photo-1604908554162-60d4b89f8d1a?auto=format&amp;fit=crop&amp;w=800&amp;q=60" alt="Biryani dish"></div>
+<div class="th-main">
+<p class="th-name">Lahori Karahi (Dummy)</p>
+<p class="th-meta">⭐ 4.7 &bull; 25&ndash;35 min &bull; Delivery from &pound;2.49</p>
+<div class="th-row"><span class="th-badge">30% OFF &bull; Save &pound;8</span> <span class="th-cta">Order in App &rarr;</span></div>
+</div>
+</div>
+</a><!-- CARD 2 --><a class="th-card" href="#">
+<div class="th-card-inner">
+<div class="th-img"><img src="https://images.unsplash.com/photo-1604908176997-125f25cc500f?auto=format&amp;fit=crop&amp;w=800&amp;q=60" alt="Grilled kebabs plate"></div>
+<div class="th-main">
+<p class="th-name">Hounslow Grill House (Dummy)</p>
+<p class="th-meta">⭐ 4.6 &bull; 20&ndash;30 min &bull; Delivery from &pound;1.99</p>
+<div class="th-row"><span class="th-badge">30% OFF &bull; Save &pound;7</span> <span class="th-cta">Order in App &rarr;</span></div>
+</div>
+</div>
+</a><!-- CARD 3 --><a class="th-card" href="#">
+<div class="th-card-inner">
+<div class="th-img"><img src="https://images.unsplash.com/photo-1601050690294-397f3c324515?auto=format&amp;fit=crop&amp;w=800&amp;q=60" alt="Burger and fries"></div>
+<div class="th-main">
+<p class="th-name">Halal Burgers (Dummy)</p>
+<p class="th-meta">⭐ 4.5 &bull; 25&ndash;40 min &bull; Delivery from &pound;2.99</p>
+<div class="th-row"><span class="th-badge">30% OFF &bull; Save &pound;6</span> <span class="th-cta">Order in App &rarr;</span></div>
+</div>
+</div>
+</a><!-- CARD 4 --><a class="th-card" href="#">
+<div class="th-card-inner">
+<div class="th-img"><img src="https://images.unsplash.com/photo-1599043513900-ed6fe01d3833?auto=format&amp;fit=crop&amp;w=800&amp;q=60" alt="Shawarma wrap"></div>
+<div class="th-main">
+<p class="th-name">Shawarma Corner (Dummy)</p>
+<p class="th-meta">⭐ 4.6 &bull; 20&ndash;30 min &bull; Delivery from &pound;1.49</p>
+<div class="th-row"><span class="th-badge">30% OFF &bull; Save &pound;5</span> <span class="th-cta">Order in App &rarr;</span></div>
+</div>
+</div>
+</a><!-- CARD 5 --><a class="th-card" href="#">
+<div class="th-card-inner">
+<div class="th-img"><img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&amp;fit=crop&amp;w=800&amp;q=60" alt="Dessert platter"></div>
+<div class="th-main">
+<p class="th-name">Desserts &amp; Shakes (Dummy)</p>
+<p class="th-meta">⭐ 4.8 &bull; 15&ndash;25 min &bull; Delivery from &pound;1.99</p>
+<div class="th-row"><span class="th-badge">30% OFF &bull; Save &pound;4</span> <span class="th-cta">Order in App &rarr;</span></div>
+</div>
+</div>
+</a></div>
+</section>
+<!-- WHY -->
+<section class="th-section">
+<h2>Why Totalee Halal</h2>
+<div class="th-why">
+<div class="box"><strong>Halal-only platform</strong> Focused on halal restaurants and stores, so customers can order with confidence.</div>
+<div class="box"><strong>App-only offers</strong> Exclusive discounts like 30% off first orders and seasonal deals.</div>
+</div>
+</section>
+<!-- LOCAL SEO -->
+<section class="th-section">
+<h2>Local halal food in Hounslow</h2>
+<p class="note">Totalee Halal helps you order halal food delivery in Hounslow and West London, including areas near Heathrow. Find popular options like biryani, grilled dishes, burgers, and desserts from local halal restaurants and stores. Tap a restaurant to open it in the app and place your order in minutes.</p>
+</section>
+<!-- FAQ -->
+<section class="th-section th-faq">
+<h2>FAQs</h2>
+<details>
+<summary>What is the best halal food delivery app in Hounslow?</summary>
+<p><strong>Totalee Halal</strong> is a halal-only food delivery app serving Hounslow and West London, letting you browse verified halal restaurants and order directly in the app.</p>
+</details>
+<details>
+<summary>How do I get 30% off my first order?</summary>
+<p><strong>Totalee Halal</strong> offers 30% off for new customers on their first order (terms apply). Tap a restaurant card above to order in the app.</p>
+</details>
+<details>
+<summary>Do I need to download the app?</summary>
+<p><strong>Totalee Halal</strong> is an app-first experience. If you don&rsquo;t have it installed, you&rsquo;ll be able to download it from the App Store or Google Play.</p>
+</details>
+<details>
+<summary>Are restaurants verified halal?</summary>
+<p><strong>Totalee Halal</strong> lists halal-focused partners and aims to keep the platform halal-only. (Replace this line with your exact verification policy.)</p>
+</details>
+</section>
+<!-- Sticky CTA -->
+<div class="th-sticky">
+<div class="th-sticky-inner">
+<div class="th-sticky-text"><strong>Ready to order in Hounslow?</strong> Verified halal-only &bull; One-tap order in app</div>
+<a class="th-sticky-btn" href="#">Open Totalee Halal App</a></div>
+</div>
+</div>
+</div>
